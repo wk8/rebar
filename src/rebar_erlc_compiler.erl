@@ -173,7 +173,7 @@ test_compile(Config, Cmd, OutDir) ->
     %% with appropriate defines for eunit, and include all the test modules
     %% as well.
     TestConfig = test_compile_config(Config, ErlOpts, Cmd),
-    ok = doterl_compile(TestConfig, OutDir, TestErls, ebar_utils:erl_opts(TestConfig)),
+    ok = doterl_compile(TestConfig, OutDir, TestErls, rebar_utils:erl_opts(TestConfig)),
 
     {ok, SrcErls}.
 
