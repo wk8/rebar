@@ -713,7 +713,10 @@ update_deps_int(Config0, UDD) ->
                         Config4 = rebar_config:set_xconf(Config3, depowner,
                                                          DepOwner),
 
-                        {Config5, Res} = update_deps_int(Config4, Updated),
+                        {Config5, Res} = case rebar_config:get_global(Config0, recursive_update, true) of
+                            "false" -> {Config4, []};
+                            _ -> update_deps_int(Config4, Updated)
+                        end,
                         {Config5, lists:umerge(lists:sort(Res),
                                                lists:sort(Updated))}
                 end, {Config1, lists:umerge(lists:sort(UpdatedDeps),
